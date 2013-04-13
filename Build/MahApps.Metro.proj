@@ -1,23 +1,17 @@
 <Project ToolsVersion="4.0" DefaultTargets="Version" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <Import Project="$(SolutionDir)\.build\MSBuild.Community.Tasks.Targets"/>
+
   <PropertyGroup>
-    <Configuration Condition="'$(Configuration)'==''">Release</Configuration>
     <Version>$(BUILD_NUMBER)</Version>
     <GitCommitHash>$(BUILD_VCS_NUMBER)</GitCommitHash>
     <GitCommitHash Condition=" '$(GitCommitHash)' != '' ">$(GitCommitHash.Substring(0, 7))</GitCommitHash>
     <!-- dev config -->
     <SourceDir>$(SolutionDir)\MahApps.Metro</SourceDir>
-    <TargetFile>$(SolutionDir)\.build\MSBuild.Community.Tasks.Targets</TargetFile>
   </PropertyGroup>
 
-  <Import Project="$(TargetFile)"/>
-
   <Target Name="Version">
-
-    <Message Text="MSBuild: $(TargetFile)"/>
-
-
-    <GitVersion LocalPath="$(SourceDir)\..\" Condition=" '$(GitCommitHash)' == '' ">
+    <GitVersion LocalPath="$(SolutionDir)\" Condition=" '$(GitCommitHash)' == '' ">
       <Output TaskParameter="CommitHash" PropertyName="GitCommitHash" />
     </GitVersion>
 
@@ -30,7 +24,5 @@
                   AssemblyInformationalVersion="Built from hash '$(GitCommitHash)'" />
 
     <Message Text="Building version $(Version) from hash $(GitCommitHash)"  Importance="High" />
-
   </Target>
-
 </Project>
