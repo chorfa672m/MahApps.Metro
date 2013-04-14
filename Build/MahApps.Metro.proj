@@ -17,8 +17,6 @@
 
     <AssemblyInfo CodeLanguage="CS" 
                   OutputFile="$(SourceDir)\Properties\CommonAssemblyInfo.cs"
-                  AssemblyCopyright="Copyright © MahApps.Metro 2013" 
-                  ComVisible="false" 
                   AssemblyVersion="$(Version)" 
                   AssemblyFileVersion="$(Version)" 
                   AssemblyInformationalVersion="Built from hash '$(GitCommitHash)'" />
